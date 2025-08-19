@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
             $table->string('ip', 45)->index(); // IPv4/IPv6 support with index
-            $table->text('url')->index(); // URL path with index for analytics
+            $table->string('url', 500); // URL path (no index to avoid key length issue)
             $table->string('method', 10)->default('GET')->index(); // HTTP method
             $table->smallInteger('status')->index(); // HTTP status code
             $table->text('user_agent')->nullable(); // Browser info

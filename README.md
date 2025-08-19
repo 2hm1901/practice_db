@@ -1,23 +1,23 @@
 # Practice Database Project - Log Analytics
 
-Dự án phân tích log truy cập web với focus vào tối ưu hiệu năng database và benchmark.
+A web access log analytics project focused on database performance optimization and benchmarking.
 
-## Cấu trúc dự án
+## Project Structure
 
 - `be_db/` - Laravel Backend API
 - `fe_db/` - React TypeScript Frontend
 
-## Mục tiêu dự án
+## Project Goals
 
-- Xử lý và phân tích log với khối lượng lớn (1M-10M bản ghi)
-- Tối ưu hiệu năng qua 5 giai đoạn:
-  1. Baseline (chưa tối ưu)
+- Process and analyze large-scale log data (1M-10M records)
+- Optimize performance through 5 stages:
+  1. Baseline (no optimization)
   2. Database indexing
   3. Redis caching
   4. Table partitioning
   5. Pre-aggregation
-- Benchmark và so sánh hiệu năng
-- Dashboard hiển thị kết quả tối ưu
+- Benchmark and compare performance improvements
+- Dashboard to display optimization results
 
 ## Technology Stack
 
@@ -26,7 +26,7 @@ Dự án phân tích log truy cập web với focus vào tối ưu hiệu năng 
 - **Caching**: Redis
 - **Database**: MySQL
 
-## Cài đặt
+## Installation
 
 ### Backend (Laravel)
 ```bash
@@ -44,11 +44,42 @@ npm install
 npm run dev
 ```
 
-## Giai đoạn phát triển
+## Development Roadmap
 
-- [ ] Thiết kế database schema
-- [ ] Tạo seeder dữ liệu giả lập
-- [ ] API phân tích log cơ bản
-- [ ] Benchmark system
-- [ ] Tối ưu hiệu năng từng giai đoạn
-- [ ] Dashboard hiển thị kết quả
+- [x] Database schema design
+- [x] Complete project structure setup
+- [ ] Generate seed data (1M+ records)
+- [ ] Basic log analysis APIs
+- [ ] Benchmark system implementation
+- [ ] Step-by-step performance optimization
+- [ ] Dashboard with comparison charts
+
+## Features
+
+### Analytics Capabilities
+- **Top URLs Analysis** - Most accessed endpoints and their performance
+- **Top IP Addresses** - Most active client IPs 
+- **HTTP Status Distribution** - Response code analytics
+- **Traffic Patterns** - Request volume by time periods
+- **Response Time Analysis** - Performance metrics over time
+
+### Performance Optimization Stages
+1. **Baseline** - Initial queries without optimization
+2. **Indexing** - Database indexes for common query patterns
+3. **Caching** - Redis caching layer implementation
+4. **Partitioning** - Table partitioning for large datasets
+5. **Pre-aggregation** - Pre-computed summary tables
+
+### Benchmark System
+- Automated performance measurement
+- Before/after comparison charts
+- Export benchmark results to CSV
+- Memory and CPU usage tracking
+- Query execution time analysis
+
+## Expected Outcomes
+
+- **Performance Improvement**: Target ≥80% query time reduction
+- **Scalability**: Handle 10M+ log records efficiently
+- **Real Metrics**: Concrete evidence of optimization effectiveness
+- **Learning**: Understanding when to apply different optimization techniques
