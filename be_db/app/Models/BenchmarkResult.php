@@ -10,45 +10,47 @@ class BenchmarkResult extends Model
     use HasFactory;
 
     protected $fillable = [
-        'query_name',
-        'duration_ms',
-        'description',
-        'optimization_stage',
-        'dataset_size',
-        'memory_usage',
-        'cpu_usage'
+        'stage',
+        'query_count',
+        'total_execution_time',
+        'avg_execution_time',
+        'records_processed',
+        'results_data'
     ];
 
     protected $casts = [
-        'duration_ms' => 'float',
-        'dataset_size' => 'integer',
-        'memory_usage' => 'float',
-        'cpu_usage' => 'float',
+        'query_count' => 'integer',
+        'total_execution_time' => 'float',
+        'avg_execution_time' => 'float',
+        'records_processed' => 'integer',
+        'results_data' => 'json',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
+    // Optimization stage constants
+    const STAGE_BASELINE = 'baseline';
+    const STAGE_INDEXING = 'indexing';
+    const STAGE_CACHING = 'caching';
+    const STAGE_PARTITIONING = 'partitioning';
+    const STAGE_PRE_AGGREGATION = 'pre_aggregation';
+
     // Optimization stages enum
     const STAGES = [
-        'baseline' => 'Baseline (No optimization)',
-        'indexed' => 'After indexing',
-        'cached' => 'After caching',
-        'partitioned' => 'After partitioning',
-        'pre_aggregated' => 'After pre-aggregation'
+        self::STAGE_BASELINE => 'Baseline (No optimization)',
+        self::STAGE_INDEXING => 'After indexing optimization',
+        self::STAGE_CACHING => 'After caching optimization',
+        self::STAGE_PARTITIONING => 'After partitioning optimization',
+        self::STAGE_PRE_AGGREGATION => 'After pre-aggregation optimization'
     ];
 
     public function scopeByStage($query, $stage)
     {
-        return $query->where('optimization_stage', $stage);
+        return $query->where('stage', $stage);
     }
 
-    public function scopeByQuery($query, $queryName)
+    public function getStageNameAttribute()
     {
-        return $query->where('query_name', $queryName);
-    }
-
-    public function getOptimizationStageNameAttribute()
-    {
-        return self::STAGES[$this->optimization_stage] ?? $this->optimization_stage;
+        return self::STAGES[$this->stage] ?? $this->stage;
     }
 }
